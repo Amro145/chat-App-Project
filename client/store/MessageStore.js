@@ -17,7 +17,6 @@ export const useMessageStore = create((set, get) => ({
 
       set({ users: res.data.data });
     } catch (error) {
-      toast.error("get All user faild");
       console.log(error);
 
     } finally {
@@ -31,7 +30,6 @@ export const useMessageStore = create((set, get) => ({
       const res = await myAxios.get(`/message/${friendID}`);
       set({ messages: res.data });
     } catch (error) {
-      toast.error("getMessagesFn");
       console.log(error);
 
     } finally {
