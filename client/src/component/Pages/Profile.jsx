@@ -30,8 +30,7 @@ function Profile() {
   const color = useColorModeValue("gray.900", "gray.100");
 
   return (
-    <Box color={color} bg={bg} className="min-h-screen">
-      <Info />
+    <Box color={color} bg={bg} className="">
       <div className="flex gap-3 flex-col w-full    py-5 justify-center items-center  ">
         <div className="gap-3 grid   w-full text-center px-5 max-w-sm  border border-gray-200 rounded-lg shadow-sm dark:-800 dark:border-gray-700">
           <div className="title">

@@ -25,20 +25,14 @@ function Home() {
   }, [selectedUser, subscribeToMessage, unSubcribeToMessage]);
 
   return (
-    <Box  className="grid w-full justify-center " >
-      <div className="py-2">
-        <Info />
-      </div>
-
-      <div className="flex justify-start">
-        <div className="">
-          <SidebarHome />
-        </div>
-        <div className="">
+    <Box  className="flex w-full justify-center mt-10 " >
+    <div className="w-1/4">
+            <SidebarHome />
+    </div>
+    <div className="w-3/4">
           <NoChatSelected />
-        </div>
-      </div>
-    </Box>
+    </div>
+    </Box>  
   );
 }
 

@@ -38,7 +38,7 @@ function Login() {
     <Box
       bg={bg}
       color={color}
-      className="min-h-screen overflow-hidden z-10 p-10 md:p-0 flex justify-center items-center"
+      className=" overflow-hidden min-h-screen z-10 p-10 md:p-0 flex justify-center items-center"
     >
       <section className="w-full  flex justify-center">
         <div className="w-full md:mt-0 sm:max-w-md xl:p-0 d">

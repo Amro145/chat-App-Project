@@ -9,7 +9,7 @@ function ChatHome() {
   const { isMessagesLoading } = useMessageStore();
 
   return (
-    <Box className="w-screen h-screen bg-black  flex flex-col  ">
+    <Box className="w-screen  bg-black  flex flex-col  ">
       {isMessagesLoading ? (
        <div className="flex flex-col justify-between  ">
        <ChatHeader />

@@ -9,6 +9,7 @@ import { Loader } from "lucide-react";
 import { Box } from "@chakra-ui/react";
 import ChatHome from "./component/Pages/HomePage/ChatHome";
 import { useMessageStore } from "../store/MessageStore";
+import Info from "./component/Pages/HomePage/Info";
 
 function App() {
   const { authUser, checkAuth, isCheckingAuth } = useAuthStore();
@@ -16,23 +17,21 @@ function App() {
 
   useEffect(() => {
     checkAuth();
-  }, [authUser]);
+  }, []);
 
   if (isCheckingAuth && !authUser) {
     return (
-      <>
         <Box className="min-h-screen bg-black flex justify-center items-center">
           <div>
             <Loader className="size-20 animate-spin" />
           </div>
         </Box>
-      </>
     );
   }
   return (
-    <>
       <Box className="min-h-screen bg-black  ">
         <BrowserRouter>
+        {authUser && !isCheckingAuth && <Info />}
           <Routes>
             <Route
               path="/"
@@ -79,7 +78,6 @@ function App() {
           </Routes>
         </BrowserRouter>
       </Box>
-    </>
   );
 }
 
