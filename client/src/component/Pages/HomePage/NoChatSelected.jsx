@@ -2,7 +2,7 @@ import { MessageSquare } from "lucide-react";
 
 const NoChatSelected = () => {
   return (
-    <div className=" fixed top-0">
+    <div className=" fixed top-0 ">
       <div className="w-full  flex flex-1 flex-col items-center justify-center p-16 relative top-56 ">
         <div className="max-w-md text-center space-y-6">
           {/* Icon Display */}

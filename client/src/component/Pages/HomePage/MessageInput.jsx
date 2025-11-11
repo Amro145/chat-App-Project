@@ -48,7 +48,7 @@ function MessageInput() {
     }
   };
   return (
-    <Box>
+    <Box className="flex bg-green-700">
       {imagePreview && (
         <div className="relative bottom-20 h-3 left-10">
           <Image src={imagePreview} className="h-24 " />
@@ -57,19 +57,22 @@ function MessageInput() {
           </button>
         </div>
       )}
-      <div className="fixed bottom-0 pb-10 w-screen z-30 bg-black">
+      <div className="fixed bottom-0 bg-black pb-2 w-screen z-30 ">
         <form
           onSubmit={handleSendMessage}
-          className="flex justify-center px-4 "
+          className="flex justify-between px-4 w-full items-between "
         >
-          <div className="flex-1 ">
+          <div className=" w-full  mr-5 items-center justify-center ">
             <input
               type="text "
               placeholder="Type a message..."
               value={text}
               onChange={(e) => setText(e.target.value)}
-              className="w-11/12 text-red-50  p-2 ml-5 input-bordered rounded-lg"
+              className="w-12/12 text-red-50  p-2 ml-5 input-bordered rounded-lg"
             />
+          </div>
+ 
+          <div className="  z-10 flex items-center justify-center">
             <input
               type="file"
               accept="image/*"
@@ -77,8 +80,6 @@ function MessageInput() {
               onChange={handleImageChange}
               className="hidden"
             />
-          </div>
-          <div className="">
             <Button
               type="button"
               className={` ${
@@ -89,7 +90,10 @@ function MessageInput() {
               <ImageIcon size={22} />
             </Button>
             <Button type="submit" disabled={!text.trim() && !imagePreview}>
-              <Send size={22} className={text === "" ? "text-gray-400" : "text-white"} />
+              <Send
+                size={22}
+                className={text === "" ? "text-gray-400" : "text-white"}
+              />
             </Button>
           </div>
         </form>

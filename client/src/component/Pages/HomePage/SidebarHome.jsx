@@ -24,40 +24,44 @@ function SidebarHome() {
   const color = useColorModeValue("gray.900", "gray.100");
 
   return (
-    <Box color={color} className=" grid px-5 border-r-2 border-gray-600   ">
-      <div className="flex">
-        <Users />
-        <h1>Contacts</h1>
+    <Box
+      color={color}
+      className=" flex flex-col px-5 border-r-2 min-h-screen gap-2 justify-start items-start border-gray-600   "
+    >
+      <div className="flex flex-col gap-2">
+        <div className="flex items-center gap-2">
+          <Users />
+          <h1>Contacts</h1>
+        </div>
+        <div className="flex items-center">
+          <input
+            id="checked-checkbox"
+            type="checkbox"
+            onChange={(e) => setShowOnlineOnly(e.target.checked)}
+            className="w-4 h-4 text-blue-600 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
+          />
+          <label
+            htmlFor="checked-checkbox"
+            className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+          >
+            Show Only Online
+          </label>
+          <span className="text-zinc-500">
+            (<span>{onlineUsers.length - 1} online</span>)
+          </span>
+        </div>
+        <hr />
       </div>
-      <div className="flex items-center">
-        <input
-          id="checked-checkbox"
-          type="checkbox"
-          onChange={(e) => setShowOnlineOnly(e.target.checked)}
-          className="w-4 h-4 text-blue-600 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
-        />
-        <label
-          htmlFor="checked-checkbox"
-          className="ms-2 text-sm font-medium text-gray-900 dark:text-gray-300"
-        >
-          Show Only Online
-        </label>
-        <span className="text-zinc-500">
-          (<span>{onlineUsers.length - 1} online</span>)
-        </span>
-      </div>
-
-      <hr />
 
       {isUsersLoading ? (
         <SidebarSkeleton />
       ) : (
-        <div className=" row-span-3 py-10  overflow-scroll  ">
+        <div className="overflow-y-scroll flex flex-col w-full   min-h-screen">
           {filteredUsers.map((user) => {
             return (
               <Link to="/message" key={user._id}>
                 <button
-                  className="flex gap-4 mb-5 text-start"
+                  className="flex gap-4 text-start py-2"
                   onClick={() => setSelectdUser(user)}
                 >
                   <Image

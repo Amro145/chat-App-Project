@@ -17,7 +17,7 @@ function ChatHome() {
        <MessageInput />
      </div>
       ) : (
-        <div className="flex flex-col justify-between  ">
+        <div className="flex flex-col justify-between h-screen  ">
           <ChatHeader />
           <ChatMessages />
           <MessageInput />
