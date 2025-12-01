@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 import SidebarSkeleton from "../../../skeletons/SidebarSkeleton";
 
 function SidebarHome() {
-  const { users, getUserFn, setSelectdUser, isUsersLoading } =
+  const { users, getUserFn, setSelectedUser, isUsersLoading } =
     useMessageStore();
   const { onlineUsers } = useAuthStore();
   useEffect(() => {
@@ -62,7 +62,7 @@ function SidebarHome() {
               <Link to="/message" key={user._id}>
                 <button
                   className="flex gap-4 text-start py-2"
-                  onClick={() => setSelectdUser(user)}
+                  onClick={() => setSelectedUser(user)}
                 >
                   <Image
                     src={

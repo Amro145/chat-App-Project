@@ -23,7 +23,7 @@ export const useMessageStore = create((set, get) => ({
       set({ isUsersLoading: false });
     }
   },
-  setSelectdUser: (selectedUser) => set({ selectedUser }),
+  setSelectedUser: (selectedUser) => set({ selectedUser }),
   getMessagesFn: async (friendID) => {
     set({ isMessagesLoading: true });
     try {
@@ -58,7 +58,7 @@ export const useMessageStore = create((set, get) => ({
       set({ messages: [...get().messages, newMessage] });
     });
   },
-  unSubcribeToMessage: () => {
+  unsubscribeFromMessage: () => {
     const socket = useAuthStore.getState().socket;
     socket.off("newMessage");
   },

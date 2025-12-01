@@ -6,14 +6,14 @@ import toast from "react-hot-toast";
 import { Box } from "@chakra-ui/react";
 import { useColorModeValue } from "../../components/ui/color-mode";
 
-function SingUp() {
-  const [showPassword, setShowPassowrd] = useState(false);
+function SignUp() {
+  const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
     userName: "",
     email: "",
     password: "",
   });
-  const { singUp, isSingingUp } = useAuthStore();
+  const { signUp, isSigningUp } = useAuthStore();
 
   const validateForm = () => {
     if (!formData.userName.trim()) {
@@ -32,7 +32,7 @@ function SingUp() {
     e.preventDefault();
     const success = validateForm();
     if (success === true) {
-      singUp(formData);
+      signUp(formData);
     }
   };
   const bg = useColorModeValue("gray.100", "gray.900");
@@ -46,7 +46,7 @@ function SingUp() {
       <div className=" container max-w-sm mx-auto flex-1 flex flex-col items-center justify-center  ">
         <div className="header mb-10">
           <h1 className=" text-3xl font-bold text-center">Welcome to Chat</h1>
-          <h3>Sing Up and enjoy with communication</h3>
+          <h3>Sign Up and enjoy with communication</h3>
         </div>
         <div className=" py-8 rounded  w-full">
           <form onSubmit={handleSubmit}>
@@ -88,7 +88,7 @@ function SingUp() {
               <button
                 type="button"
                 className="relative right-10 -top-2 w-0 "
-                onClick={() => setShowPassowrd(!showPassword)}
+                onClick={() => setShowPassword(!showPassword)}
               >
                 {showPassword ? (
                   <svg
@@ -133,20 +133,20 @@ function SingUp() {
               type="submit "
               className="w-full transition bg-blue-600 duration-500 hover:bg-blue-400  text-center py-3 rounded   my-1"
             >
-              {isSingingUp ? (
+              {isSigningUp ? (
                 <div className="flex justify-center">
                   loading ...
                   <Loader2 className="size-5 animate-spin" />
                 </div>
               ) : (
-                <div>Sing Up</div>
+                <div>Sign Up</div>
               )}
             </button>
           </form>
         </div>
         <div className=" mt-6">
           <div className="">
-            <span className="">Alrdeay have Account ?</span>
+            <span className="">Already have Account ?</span>
           </div>
           <Link
             className="w-full block transition border border-blue-600 duration-500 hover:bg-blue-300  text-center py-3 rounded   my-1"
@@ -160,4 +160,4 @@ function SingUp() {
   );
 }
 
-export default SingUp;
+export default SignUp;

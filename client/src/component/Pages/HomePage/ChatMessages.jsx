@@ -2,7 +2,7 @@ import { useRef } from "react";
 import { useMessageStore } from "../../../../store/MessageStore";
 import { useAuthStore } from "../../../../store/authStore";
 import { useEffect } from "react";
-import { formatMessageTime } from "../../../../lib/utilits";
+import { formatMessageTime } from "../../../../lib/utils";
 
 function ChatMessages() {
   const { messages, selectedUser } = useMessageStore();
@@ -19,9 +19,8 @@ function ChatMessages() {
       {messages.map((message) => (
         <div
           key={message._id}
-          className={`chat ${
-            message.senderId === authUser._id ? "chat-end" : "chat-start"
-          }`}
+          className={`chat ${message.senderId === authUser._id ? "chat-end" : "chat-start"
+            }`}
           ref={messagesEndRef}
         >
           <div className=" chat-image avatar">

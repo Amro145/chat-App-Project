@@ -1,13 +1,13 @@
-const { validateCreatUser, User } = require("../Models/user.model");
-const bcrybt = require("bcrypt");
+const { validateCreateUser, User } = require("../Models/user.model");
+const bcrypt = require("bcrypt");
 const generateToken = require("../lib/utils");
 const cloudinary = require("../lib/cloudinary");
 
-const singUp = async (req, res) => {
+const signUp = async (req, res) => {
   try {
     const { email, userName, password, profile } = req.body;
     // check input value
-    const { error } = validateCreatUser(req.body);
+    const { error } = validateCreateUser(req.body);
     if (error) {
       return res.status(400).json({ message: "Please Out fill" });
     }
@@ -17,8 +17,8 @@ const singUp = async (req, res) => {
       return res.status(400).json({ message: "User Already exist" });
     }
     // hash password
-    const salt = await bcrybt.genSalt(10);
-    const hashedPassword = await bcrybt.hash(password, salt);
+    const salt = await bcrypt.genSalt(10);
+    const hashedPassword = await bcrypt.hash(password, salt);
     // create User
     const newUser = new User({
       email,
@@ -31,13 +31,13 @@ const singUp = async (req, res) => {
       await newUser.save();
       return res
         .status(201)
-        .json({ message: "User Created Succefuly", data: newUser });
+        .json({ message: "User Created Successfully", data: newUser });
       req.user = newUser;
     } else {
       return res.status(400).json({ message: "invalid User Data" });
     }
   } catch (error) {
-    return res.status(500).json({ message: "Error in Singup" });
+    return res.status(500).json({ message: "Error in Signup" });
   }
 };
 
@@ -52,7 +52,7 @@ const login = async (req, res) => {
         .json({ message: "Email or Password is not Correct" });
     }
     // check password
-    const isPassword = await bcrybt.compare(password, user.password);
+    const isPassword = await bcrypt.compare(password, user.password);
     if (!isPassword) {
       return res
         .status(404)
@@ -62,7 +62,7 @@ const login = async (req, res) => {
     generateToken(user._id, res);
     // login
     req.user = user;
-    return res.status(200).json({ succes: true, data: user });
+    return res.status(200).json({ success: true, data: user });
   } catch (error) {
     return res.status(500).json({ message: "Error in Login" });
   }
@@ -72,7 +72,7 @@ const logout = async (req, res) => {
     res.cookie("jwt", "", {
       maxAge: 0,
     });
-    return res.status(200).json({ succes: true, message: "logout Succufuly" });
+    return res.status(200).json({ success: true, message: "logout Successfully" });
   } catch (error) {
     return res.status(500).json({ message: "Error in Logout" });
   }
@@ -93,8 +93,8 @@ const updateProfile = async (req, res) => {
       { new: true }
     );
     return res.status(200).json({
-      succes: true,
-      message: "Profile Updated Succefuly",
+      success: true,
+      message: "Profile Updated Successfully",
       data: updateProfile.profile,
     });
   } catch (error) {
@@ -102,11 +102,11 @@ const updateProfile = async (req, res) => {
   }
 };
 
-const chekAuth = (req, res) => {
+const checkAuth = (req, res) => {
   try {
     return res.status(200).json({ message: "success Verify", data: req.user });
   } catch (error) {
-    return res.status(500).send("Error in Ckack Auth");
+    return res.status(500).send("Error in Check Auth");
   }
 };
 
@@ -117,25 +117,25 @@ const getAllUsers = async (req, res) => {
     if (!myAccount) {
       return res
         .status(400)
-        .json({ succes: false, message: "please Login First" });
+        .json({ success: false, message: "please Login First" });
     }
 
     const users = await User.find({ _id: { $ne: myAccount._id } }).select(
       "-password"
     );
-    return res.status(200).json({ succes: true, data: users });
+    return res.status(200).json({ success: true, data: users });
   } catch (error) {
     return res
       .status(500)
-      .json({ succes: false, message: "Error in get all users" });
+      .json({ success: false, message: "Error in get all users" });
   }
 };
 
 module.exports = {
-  singUp,
+  signUp,
   login,
   logout,
   updateProfile,
-  chekAuth,
+  checkAuth,
   getAllUsers,
 };

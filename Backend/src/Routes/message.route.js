@@ -1,10 +1,10 @@
 const express = require("express");
 const { model } = require("mongoose");
-const { getMessage, sendMassage } = require("../Contorller/message.contorller");
+const { getMessage, sendMessage } = require("../Controllers/message.controller");
 const verifyToken = require("../Middleware/verify");
 const Route = express.Router();
 
 Route.get("/:id", verifyToken, getMessage);
-Route.post("/send/:id", verifyToken, sendMassage);
+Route.post("/send/:id", verifyToken, sendMessage);
 
 module.exports = Route;

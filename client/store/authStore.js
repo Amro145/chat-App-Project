@@ -8,8 +8,8 @@ const URL =
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
-  isSingingUp: false,
-  isLogining: false,
+  isSigningUp: false,
+  isLoggingIn: false,
   isUpdateProfile: false,
   isCheckingAuth: true,
   onlineUsers: [],
@@ -23,15 +23,15 @@ export const useAuthStore = create((set, get) => ({
     } catch (error) {
       set({ authUser: null });
       console.log(error);
-      
+
     } finally {
       set({ isCheckingAuth: false });
     }
   },
-  singUp: async (data) => {
+  signUp: async (data) => {
     set({ isSigningUp: true });
     try {
-      const res = await myAxios.post("/auth/singup", data);
+      const res = await myAxios.post("/auth/signup", data);
       set({ authUser: res.data });
       toast.success("Account created successfully");
       get().connectSocket();
@@ -44,16 +44,16 @@ export const useAuthStore = create((set, get) => ({
   },
 
   login: async (data) => {
-    set({ isLogining: true });
+    set({ isLoggingIn: true });
     try {
       const res = await myAxios.post("/auth/login", data);
       set({ authUser: res.data });
-      toast.success("succes Login");
+      toast.success("Login Successful");
       get().connectSocket();
     } catch (error) {
       toast.error(error.response.data.message);
     } finally {
-      set({ isLogining: false });
+      set({ isLoggingIn: false });
     }
   },
   logout: async () => {
@@ -62,7 +62,7 @@ export const useAuthStore = create((set, get) => ({
       set({ authUser: null });
       get().disconnectSocket();
     } catch (error) {
-      toast.error("logout error");
+      toast.error("Logout Error");
       console.log(error);
 
     }

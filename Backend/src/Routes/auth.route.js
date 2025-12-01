@@ -1,22 +1,22 @@
 const express = require("express");
 const Route = express.Router();
 const {
-  singUp,
+  signUp,
   login,
   logout,
   updateProfile,
-  chekAuth,
+  checkAuth,
   getAllUsers,
-} = require("../Contorller/auth.contorller");
-const vervifyUser = require("../Middleware/verify");
+} = require("../Controllers/auth.controller");
+const verifyToken = require("../Middleware/verify");
 
 
 
-Route.post("/singup", singUp);
+Route.post("/signup", signUp);
 Route.post("/login", login);
 Route.post("/logout", logout);
-Route.put("/update-profile", vervifyUser, updateProfile);
-Route.get("/check", vervifyUser, chekAuth);
-Route.get("/users",vervifyUser, getAllUsers);
+Route.put("/update-profile", verifyToken, updateProfile);
+Route.get("/check", verifyToken, checkAuth);
+Route.get("/users", verifyToken, getAllUsers);
 
 module.exports = Route;

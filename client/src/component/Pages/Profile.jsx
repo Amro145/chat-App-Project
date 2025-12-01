@@ -106,9 +106,9 @@ function Profile() {
           </div>
         </div>
         <div className="gap-2  grid px-10 w-full pb-3 text-center max-w-sm  border border-gray-200 rounded-lg shadow-sm dark:-800 dark:border-gray-700">
-          <div className="title">Acount Information</div>
+          <div className="title">Account Information</div>
           <div className="flex justify-between">
-            <div>membersince</div>
+            <div>Member Since</div>
             <div>
               {authUser.data.createdAt
                 ? authUser.data.createdAt.slice(0, 10)

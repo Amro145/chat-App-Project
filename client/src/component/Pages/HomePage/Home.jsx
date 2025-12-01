@@ -6,12 +6,12 @@ import NoChatSelected from "./NoChatSelected";
 import { useEffect } from "react";
 
 function Home() {
-  
+
   const {
     selectedUser,
     getMessagesFn,
     subscribeToMessage,
-    unSubcribeToMessage,
+    unsubscribeFromMessage,
   } = useMessageStore();
 
   useEffect(() => {
@@ -20,19 +20,19 @@ function Home() {
 
     subscribeToMessage();
     return () => {
-      unSubcribeToMessage();
+      unsubscribeFromMessage();
     };
-  }, [selectedUser, subscribeToMessage, unSubcribeToMessage]);
+  }, [selectedUser, subscribeToMessage, unsubscribeFromMessage]);
 
   return (
-    <Box  className="flex w-full justify-center mt-10 " >
-    <div className="w-1/4">
-            <SidebarHome />
-    </div>
-    <div className="w-3/4">
-          <NoChatSelected />
-    </div>
-    </Box>  
+    <Box className="flex w-full justify-center mt-10 " >
+      <div className="w-1/4">
+        <SidebarHome />
+      </div>
+      <div className="w-3/4">
+        <NoChatSelected />
+      </div>
+    </Box>
   );
 }
 

@@ -6,7 +6,7 @@ const UserSchema = new mongoose.Schema(
     email: {
       type: String,
       required: true,
-      uniqe: true,
+      unique: true,
     },
     userName: {
       type: String,
@@ -27,7 +27,7 @@ const UserSchema = new mongoose.Schema(
 );
 const User = mongoose.model("ChatUser", UserSchema);
 
-function validateCreatUser(obj) {
+function validateCreateUser(obj) {
   const Schema = Joi.object({
     email: Joi.string().required(),
     password: Joi.string().min(6).required(),
@@ -36,4 +36,4 @@ function validateCreatUser(obj) {
   });
   return Schema.validate(obj);
 }
-module.exports = { User, validateCreatUser };
+module.exports = { User, validateCreateUser };

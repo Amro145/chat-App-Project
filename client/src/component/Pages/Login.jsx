@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { useAuthStore } from "../../../store/authStore";
 import { Loader2 } from "lucide-react";
@@ -7,8 +7,8 @@ import { Box } from "@chakra-ui/react";
 import { useColorModeValue } from "../../components/ui/color-mode";
 
 function Login() {
-  const [showPassword, setShowPassowrd] = useState(false);
-  const { isLogining, login } = useAuthStore();
+  const [showPassword, setShowPassword] = useState(false);
+  const { isLoggingIn, login } = useAuthStore();
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -75,9 +75,9 @@ function Login() {
                     }
                   />
                   <button
-                  type="button"
+                    type="button"
                     className="relative right-10  w-0 "
-                    onClick={() => setShowPassowrd(!showPassword)}
+                    onClick={() => setShowPassword(!showPassword)}
                   >
                     {showPassword ? (
                       <svg
@@ -123,19 +123,19 @@ function Login() {
                 type="submit "
                 className="w-full transition bg-blue-600 duration-500 hover:bg-blue-400  text-center py-3 rounded   my-1"
               >
-                {isLogining ? (
+                {isLoggingIn ? (
                   <div className="flex justify-center">
                     loading ...
                     <Loader2 className="size-5 animate-spin" />
                   </div>
                 ) : (
-                  <div>Sing in</div>
+                  <div>Sign in</div>
                 )}
               </button>
               <p className="text-sm font-light -500 dark:-400">
                 Don’t have an account yet?
                 <Link
-                  to="/singup"
+                  to="/signup"
                   className=" block transition border border-blue-600 duration-500 hover:bg-blue-300  text-center py-3 rounded   my-1"
                 >
                   Sign up
