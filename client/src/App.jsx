@@ -18,6 +18,9 @@ function App() {
   useEffect(() => {
     checkAuth();
   }, []);
+  useEffect(() => {
+    console.log(authUser);
+  }, [authUser]);
 
   if (isCheckingAuth && !authUser) {
     return (

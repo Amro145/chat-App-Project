@@ -8,7 +8,7 @@ function Profile() {
   const { isUpdateProfile, authUser, updateProfile } = useAuthStore();
   const [selectedImage, setSelectedImage] = useState(null);
   const handleImageUpdate = (e) => {
-    const file = e.target.files[0];
+    const file = e?.target?.files?.[0];
     if (!file) {
       return;
     }
@@ -21,9 +21,9 @@ function Profile() {
     };
   };
   const [formData, setFormData] = useState({
-    userName: authUser.data.userName,
-    email: authUser.data.email,
-    profile: authUser.data.profile,
+    userName: authUser?.userName,
+    email: authUser?.email,
+    profile: authUser?.profile,
   });
 
   const bg = useColorModeValue("gray.100", "gray.900");
@@ -34,7 +34,7 @@ function Profile() {
       <div className="flex gap-3 flex-col w-full     justify-center items-center  ">
         <div className="gap-3 grid   w-full text-center px-5 max-w-sm  border border-gray-200 rounded-lg shadow-sm dark:-800 dark:border-gray-700">
           <div className="title">
-            <h1 className="text-2xl">{authUser.data.userName}</h1>
+            <h1 className="text-2xl">{authUser?.userName}</h1>
           </div>
           <div className="text">
             <h1>Your Profile Information</h1>
@@ -88,9 +88,9 @@ function Profile() {
               id="userName"
               className="-50 border border-gray-300 -900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:-700 dark:border-gray-600 dark:placeholder-gray-400 dark: dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="UserName"
-              value={authUser.data.userName}
+              value={authUser.userName}
               onChange={(e) =>
-                setFormData({ ...formData, userName: e.target.value })
+                setFormData({ ...formData, userName: e?.target?.value })
               }
             />
             <input
@@ -98,9 +98,9 @@ function Profile() {
               id="email"
               className="mb-10 -50 border border-gray-300 -900 rounded-lg focus:ring-primary-600 focus:border-primary-600 block w-full p-2.5 dark:-700 dark:border-gray-600 dark:placeholder-gray-400 dark: dark:focus:ring-blue-500 dark:focus:border-blue-500"
               placeholder="amro@gmail.com"
-              value={authUser.data.email}
+              value={authUser.email}
               onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
+                setFormData({ ...formData, email: e?.target?.value })
               }
             />
           </div>
@@ -110,8 +110,8 @@ function Profile() {
           <div className="flex justify-between">
             <div>Member Since</div>
             <div>
-              {authUser.data.createdAt
-                ? authUser.data.createdAt.slice(0, 10)
+              {authUser?.createdAt
+                ? authUser?.createdAt?.slice(0, 10)
                 : "unknown"}{" "}
             </div>
           </div>

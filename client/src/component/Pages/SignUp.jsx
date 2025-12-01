@@ -16,13 +16,13 @@ function SignUp() {
   const { signUp, isSigningUp } = useAuthStore();
 
   const validateForm = () => {
-    if (!formData.userName.trim()) {
+    if (!formData?.userName?.trim()) {
       toast.error("User Name is  Required!");
-    } else if (!formData.email.trim()) {
+    } else if (!formData?.email?.trim()) {
       toast.error("Email  is  Required!");
-    } else if (!formData.password) {
+    } else if (!formData?.password) {
       toast.error("password  is  required!");
-    } else if (formData.password.length < 6) {
+    } else if (formData?.password?.length < 6) {
       toast.error("password  is Too Short");
     } else {
       return true;
@@ -57,7 +57,7 @@ function SignUp() {
               placeholder="Full Name"
               value={formData.userName}
               onChange={(e) =>
-                setFormData({ ...formData, userName: e.target.value })
+                setFormData({ ...formData, userName: e?.target?.value })
               }
             />
 
@@ -68,7 +68,7 @@ function SignUp() {
               placeholder="Email"
               value={formData.email}
               onChange={(e) =>
-                setFormData({ ...formData, email: e.target.value })
+                setFormData({ ...formData, email: e?.target?.value })
               }
             />
             <div className="flex w-85">
@@ -81,7 +81,7 @@ function SignUp() {
                 onChange={(e) =>
                   setFormData({
                     ...formData,
-                    password: e.target.value,
+                    password: e?.target?.value,
                   })
                 }
               />

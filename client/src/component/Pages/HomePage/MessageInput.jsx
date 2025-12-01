@@ -10,8 +10,8 @@ function MessageInput() {
   const fileInputRef = useRef();
   const { sendMessage } = useMessageStore();
   const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (!file.type.startsWith("image/")) {
+    const file = e?.target?.files?.[0];
+    if (!file?.type?.startsWith("image/")) {
       toast.error("Please select an image file");
       return;
     }
@@ -67,11 +67,11 @@ function MessageInput() {
               type="text "
               placeholder="Type a message..."
               value={text}
-              onChange={(e) => setText(e.target.value)}
+              onChange={(e) => setText(e?.target?.value)}
               className="w-12/12 text-red-50  p-2 ml-5 input-bordered rounded-lg"
             />
           </div>
- 
+
           <div className="  z-10 flex items-center justify-center">
             <input
               type="file"
@@ -82,9 +82,8 @@ function MessageInput() {
             />
             <Button
               type="button"
-              className={` ${
-                imagePreview ? "text-green-500" : "text-gray-100"
-              }`}
+              className={` ${imagePreview ? "text-green-500" : "text-gray-100"
+                }`}
               onClick={() => fileInputRef.current?.click()}
             >
               <ImageIcon size={22} />

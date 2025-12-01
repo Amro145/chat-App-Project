@@ -17,11 +17,11 @@ function Login() {
   const color = useColorModeValue("gray.900", "gray.100");
 
   const validateForm = () => {
-    if (!formData.email.trim()) {
+    if (!formData?.email?.trim()) {
       toast.error("Email  is  Required!");
-    } else if (!formData.password) {
+    } else if (!formData?.password) {
       toast.error("password  is  required!");
-    } else if (formData.password.length < 6) {
+    } else if (formData?.password?.length < 6) {
       toast.error("password  is Too Short");
     } else {
       return true;
@@ -56,7 +56,7 @@ function Login() {
                   placeholder="name@company.com"
                   value={formData.email}
                   onChange={(e) =>
-                    setFormData({ ...formData, email: e.target.value })
+                    setFormData({ ...formData, email: e?.target?.value })
                   }
                 />
               </div>
@@ -70,7 +70,7 @@ function Login() {
                     onChange={(e) =>
                       setFormData({
                         ...formData,
-                        password: e.target.value,
+                        password: e?.target?.value,
                       })
                     }
                   />

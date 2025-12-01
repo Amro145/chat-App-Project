@@ -15,7 +15,7 @@ export const useMessageStore = create((set, get) => ({
     try {
       const res = await myAxios.get("/auth/users");
 
-      set({ users: res.data.data });
+      set({ users: res.data });
     } catch (error) {
       console.log(error);
 

@@ -18,7 +18,7 @@ function SidebarHome() {
   const [showOnlineOnly, setShowOnlineOnly] = useState(false);
 
   const filteredUsers = showOnlineOnly
-    ? users.filter((user) => onlineUsers.includes(user._id))
+    ? users?.filter((user) => onlineUsers?.includes(user?._id))
     : users;
 
   const color = useColorModeValue("gray.900", "gray.100");
@@ -37,7 +37,7 @@ function SidebarHome() {
           <input
             id="checked-checkbox"
             type="checkbox"
-            onChange={(e) => setShowOnlineOnly(e.target.checked)}
+            onChange={(e) => setShowOnlineOnly(e?.target?.checked)}
             className="w-4 h-4 text-blue-600 rounded-sm focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
           />
           <label
@@ -47,7 +47,7 @@ function SidebarHome() {
             Show Only Online
           </label>
           <span className="text-zinc-500">
-            (<span>{onlineUsers.length - 1} online</span>)
+            (<span>{onlineUsers?.length - 1} online</span>)
           </span>
         </div>
         <hr />
@@ -57,16 +57,16 @@ function SidebarHome() {
         <SidebarSkeleton />
       ) : (
         <div className="overflow-y-scroll flex flex-col w-full   min-h-screen">
-          {filteredUsers.map((user) => {
+          {filteredUsers?.map((user) => {
             return (
-              <Link to="/message" key={user._id}>
+              <Link to="/message" key={user?._id}>
                 <button
                   className="flex gap-4 text-start py-2"
                   onClick={() => setSelectedUser(user)}
                 >
                   <Image
                     src={
-                      user.profile ||
+                      user?.profile ||
                       "https://github.com/burakorkmez/fullstack-chat-app/blob/master/frontend/public/avatar.png?raw=true"
                     }
                     boxSize="60px"
@@ -74,21 +74,21 @@ function SidebarHome() {
                     fit="cover"
                     alt="Naruto Uzumaki"
                     className={
-                      onlineUsers.includes(user._id) ? "bg-green-800 p-0" : ""
+                      onlineUsers?.includes(user?._id) ? "bg-green-800 p-0" : ""
                     }
                   />
 
                   <div>
-                    <h1>{user.userName}</h1>
+                    <h1>{user?.userName}</h1>
                     <span>
-                      {onlineUsers.includes(user._id) ? "online" : "offline"}
+                      {onlineUsers?.includes(user?._id) ? "online" : "offline"}
                     </span>
                   </div>
                 </button>
               </Link>
             );
           })}
-          {filteredUsers.length === 0 && (
+          {filteredUsers?.length === 0 && (
             <div className="text-center text-zinc-500 ">No Online Users</div>
           )}
         </div>

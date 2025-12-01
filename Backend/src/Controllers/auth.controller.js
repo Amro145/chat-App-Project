@@ -29,10 +29,10 @@ const signUp = async (req, res) => {
     if (newUser) {
       generateToken(newUser._id, res);
       await newUser.save();
+      req.user = newUser;
       return res
         .status(201)
-        .json({ message: "User Created Successfully", data: newUser });
-      req.user = newUser;
+        .json(newUser);
     } else {
       return res.status(400).json({ message: "invalid User Data" });
     }
@@ -62,7 +62,7 @@ const login = async (req, res) => {
     generateToken(user._id, res);
     // login
     req.user = user;
-    return res.status(200).json({ success: true, data: user });
+    return res.status(200).json(user);
   } catch (error) {
     return res.status(500).json({ message: "Error in Login" });
   }
@@ -92,11 +92,7 @@ const updateProfile = async (req, res) => {
       { profile: uploadResponse.secure_url },
       { new: true }
     );
-    return res.status(200).json({
-      success: true,
-      message: "Profile Updated Successfully",
-      data: updateProfile.profile,
-    });
+    return res.status(200).json(updateProfile);
   } catch (error) {
     return res.status(500).json({ message: "Error in Update Profile", error });
   }
@@ -104,7 +100,7 @@ const updateProfile = async (req, res) => {
 
 const checkAuth = (req, res) => {
   try {
-    return res.status(200).json({ message: "success Verify", data: req.user });
+    return res.status(200).json(req.user);
   } catch (error) {
     return res.status(500).send("Error in Check Auth");
   }
@@ -123,7 +119,7 @@ const getAllUsers = async (req, res) => {
     const users = await User.find({ _id: { $ne: myAccount._id } }).select(
       "-password"
     );
-    return res.status(200).json({ success: true, data: users });
+    return res.status(200).json(users);
   } catch (error) {
     return res
       .status(500)
