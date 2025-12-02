@@ -47,7 +47,7 @@ function SidebarHome() {
             Show Only Online
           </label>
           <span className="text-zinc-500">
-            (<span>{onlineUsers?.length - 1} online</span>)
+            (<span>{onlineUsers ? Math.max(0, onlineUsers.length - 1) : 0} online</span>)
           </span>
         </div>
         <hr />

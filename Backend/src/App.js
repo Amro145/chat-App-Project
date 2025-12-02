@@ -7,7 +7,34 @@ const cookieParser = require("cookie-parser");
 const path = require("path");
 dotenv.config();
 
+// Connect to Database
+ConnectToDb();
+
 const { app, server } = require("./lib/Socketio");
+
+// Trust proxy is required for secure cookies behind a proxy (like Vercel)
+app.set("trust proxy", 1);
+
+// CORS Configuration
+const corsOptions = {
+  origin: [
+    "https://chat-app-client-eight-sigma.vercel.app",
+    "http://localhost:5173",
+  ],
+  credentials: true,
+  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+  allowedHeaders: [
+    "Content-Type",
+    "Authorization",
+    "Accept",
+    "X-Requested-With",
+    "x-access-token"
+  ],
+};
+
+app.use(cors(corsOptions));
+app.options("*", cors(corsOptions)); // Handle preflight requests explicitly
+
 app.use(bodyParser.json({ limit: "50mb" }));
 app.use(
   bodyParser.urlencoded({
@@ -19,26 +46,24 @@ app.use(
 // const __dirname = path.resolve();
 
 app.use(express.json());
-app.use(express.urlencoded({ extended: true })); // لفك تشفير بيانات الفورم
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-    credentials: true,
-  })
-);
-app.use(cookieParser());
-server.listen(5000, "0.0.0.0", () => {
-  console.log("Running");
-  ConnectToDb();
+app.use(express.urlencoded({ extended: true }));
+
+
+app.get("/", (req, res) => {
+  res.send("Server is running");
 });
-// routes
-app.use("/api/auth", require("../src/Routes/auth.route"));
-app.use("/api/message", require("../src/Routes/message.route"));
 
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static(path.join(__dirname, "../../client/dist")));
+app.use(cookieParser());
 
-  app.get("*", (req, res) => {
-    res.sendFile(path.join(__dirname, "../../client", "dist", "index.html"));
+if (require.main === module) {
+  server.listen(5000, "0.0.0.0", () => {
+    console.log("Running");
   });
 }
+// routes
+app.use("/api/auth", require("./Routes/auth.route"));
+app.use("/api/message", require("./Routes/message.route"));
+
+
+
+module.exports = app;

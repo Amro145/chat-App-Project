@@ -2,11 +2,11 @@
   "name": "backend",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "src/App.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "nodemon src/App.js",
-    "start": "node src/App"
+    "dev": "NODE_ENV=development nodemon src/App.js",
+    "start": "node src/App.js"
   },
   "type": "commonjs",
   "author": "",

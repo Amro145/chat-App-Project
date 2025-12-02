@@ -4,7 +4,7 @@ import toast from "react-hot-toast";
 import { io } from "socket.io-client";
 
 const URL =
-  import.meta.env.MODE === "development" ? "http://localhost:5000" : "/";
+  import.meta.env.MODE === "development" ? "http://localhost:5000" : "https://chat-app-bacend.vercel.app";
 
 export const useAuthStore = create((set, get) => ({
   authUser: null,
@@ -86,13 +86,27 @@ export const useAuthStore = create((set, get) => ({
     const { authUser } = get();
     if (!authUser || get().socket?.connected) return;
 
+    // Vercel does not support WebSockets. If we are on Vercel, do not attempt to connect.
+    // The MessageStore will handle message fetching via polling.
+    if (URL.includes("vercel.app")) {
+      console.log("Vercel environment detected. Skipping Socket.IO connection to prevent errors.");
+      return;
+    }
+
     const socket = io(URL, {
       transports: ["websocket", "polling"],
       query: {
         userId: authUser._id,
       },
+      reconnectionAttempts: 5, // Limit reconnection attempts
     });
     socket.connect();
+
+    socket.on("connect_error", (err) => {
+      console.warn("Socket connection failed:", err.message);
+      // Optional: Disable further attempts if on Vercel to save resources
+      // socket.disconnect(); 
+    });
 
     set({ socket: socket });
 

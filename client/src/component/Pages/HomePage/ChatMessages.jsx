@@ -5,15 +5,19 @@ import { useEffect } from "react";
 import { formatMessageTime } from "../../../../lib/utils";
 
 function ChatMessages() {
-  const { messages, selectedUser, isMessagesLoading } = useMessageStore();
-
+  const { messages, selectedUser, isMessagesLoading, subscribeToMessage, unsubscribeFromMessage } = useMessageStore();
   const { authUser } = useAuthStore();
   const messagesEndRef = useRef(null);
 
   useEffect(() => {
+    subscribeToMessage();
+    return () => unsubscribeFromMessage();
+  }, [selectedUser, subscribeToMessage, unsubscribeFromMessage]);
+
+  useEffect(() => {
     console.log(authUser);
     console.log("selectedUser", selectedUser);
-    
+
   }, [authUser, selectedUser]);
   useEffect(() => {
     if (messages && messagesEndRef.current) {
